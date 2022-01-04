@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_30_122623) do
+ActiveRecord::Schema.define(version: 2022_01_04_123459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "dishes", force: :cascade do |t|
-    t.string "title"
-    t.integer "rating"
-    t.text "description"
-    t.string "location"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "lists", force: :cascade do |t|
     t.string "name"
@@ -30,15 +21,23 @@ ActiveRecord::Schema.define(version: 2021_12_30_122623) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "records", force: :cascade do |t|
-    t.bigint "dishes_id", null: false
-    t.bigint "lists_id", null: false
+  create_table "meals", force: :cascade do |t|
+    t.string "name"
+    t.integer "rate"
+    t.string "location"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["dishes_id"], name: "index_records_on_dishes_id"
-    t.index ["lists_id"], name: "index_records_on_lists_id"
   end
 
-  add_foreign_key "records", "dishes", column: "dishes_id"
-  add_foreign_key "records", "lists", column: "lists_id"
+  create_table "records", force: :cascade do |t|
+    t.bigint "meal_id", null: false
+    t.bigint "list_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["list_id"], name: "index_records_on_list_id"
+    t.index ["meal_id"], name: "index_records_on_meal_id"
+  end
+  add_foreign_key "records", "lists"
+  add_foreign_key "records", "meals"
 end
