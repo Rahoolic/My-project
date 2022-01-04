@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2022_01_04_123459) do
     t.index ["list_id"], name: "index_records_on_list_id"
     t.index ["meal_id"], name: "index_records_on_meal_id"
   end
-
   add_foreign_key "records", "lists"
   add_foreign_key "records", "meals"
 end
