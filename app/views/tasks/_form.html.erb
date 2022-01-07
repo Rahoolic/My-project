@@ -22,18 +22,15 @@
   </div>
 
   <div class="field">
-    <%#= form.label :state %>
-    <%#= form.number_field :state %>
+
+    <%= form.label :state %>
+    <%= form.select :state, Task.states.keys.to_a %>
+
   </div>
 
   <div class="field">
     <%#= form.label :due_at %>
     <%#= form.datetime_select :due_at %>
-  </div>
-
-  <div class="field">
-    <%= form.label :deleted_at %>
-    <%= form.datetime_select :deleted_at %>
   </div>
 
   <div class="actions">
