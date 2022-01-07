@@ -10,34 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_123459) do
+ActiveRecord::Schema.define(version: 2022_01_07_120135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "lists", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "meals", force: :cascade do |t|
-    t.string "name"
-    t.integer "rate"
-    t.string "location"
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
     t.text "description"
+    t.integer "state", default: 0
+    t.datetime "due_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
-  create_table "records", force: :cascade do |t|
-    t.bigint "meal_id", null: false
-    t.bigint "list_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["list_id"], name: "index_records_on_list_id"
-    t.index ["meal_id"], name: "index_records_on_meal_id"
-  end
-  add_foreign_key "records", "lists"
-  add_foreign_key "records", "meals"
-end
